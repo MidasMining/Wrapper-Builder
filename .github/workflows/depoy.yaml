@@ -7,6 +7,9 @@ jobs:
     name: Building on Hive
     steps:
 
+      - name: Checkout sources
+        uses: actions/checkout@v4
+
       - name: Create bin directory
         run: mkdir bin
 
