@@ -20,6 +20,7 @@ jobs:
           hiveos_archive="bin/${hiveos_asset_name}.tar.gz"
           cp -r ./hive-os ./bin/xelis_miner
           sed 's/^ver="custom"/ver="${version}"/g' -i ./bin/xelis_miner/h-stats.sh
+          chmod +x ./bin/xelis_miner/h-run.sh
           tar -czvf "${hiveos_archive}" -C ./bin xelis_miner
 
       - name: Upload release asset
