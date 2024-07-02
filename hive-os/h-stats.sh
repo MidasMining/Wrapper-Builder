@@ -44,7 +44,7 @@ ac=$(grep -oP "Accepted: \K\d+" <<< "$log" | tail -n1)
 
 rj=$(grep -oP "Rejected: \K\d+" <<< "$log" | tail -n1)
 ver="custom"
-algo="spectrex"
+algo="xelishash"
 cpu_temp=$(/hive/sbin/cpu-temp)
 hs_units="hs"
 
