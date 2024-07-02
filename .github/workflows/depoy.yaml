@@ -24,6 +24,8 @@ jobs:
 
       - name: Upload release asset
         uses: softprops/action-gh-release@v2
+        
         with:
           files: |
             bin/*.tar.gz
+          tag_name: "v1.13.0"
