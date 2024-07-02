@@ -37,12 +37,12 @@ get_uptime(){
 uptime=$(get_uptime)
 
 # Extract the most recent total khs value from the log
-total_khs=$(grep -oP "hashrate is: \K\d+.\d+" <<< "$log" | tail -n1)
+total_khs=$(grep -oP "\d+.\d+" <<< "$log" | tail -n1)
 
 # Count the number of blocks submitted successfully
-ac=$(grep -coP "Block submitted successfully!" <<< "$log")
+ac=$(grep -oP "Accepted: \K\d+" <<< "$log" | tail -n1)
 
-rj=0
+rj=$(grep -oP "Rejected: \K\d+" <<< "$log" | tail -n1)
 ver="custom"
 algo="spectrex"
 cpu_temp=$(/hive/sbin/cpu-temp)
