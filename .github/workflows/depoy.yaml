@@ -15,12 +15,12 @@ jobs:
           version="v1.13.0"
           hiveos_asset_name="xelis_miner-${version}_hiveos"
           hiveos_archive="bin/${hiveos_asset_name}.tar.gz"
-          cp -r ./hive-os ./bin/xelis_miner
-          sed 's/^ver="custom"/ver="${version}"/g' -i ./bin/xelis_miner/h-stats.sh
-          tar -czvf "${hiveos_archive}" -C ./bin xelis_miner
+          cp -r ~/hive-os ~/bin/xelis_miner
+          sed 's/^ver="custom"/ver="${version}"/g' -i ~/bin/xelis_miner/h-stats.sh
+          tar -czvf "${hiveos_archive}" -C ~/bin xelis_miner
 
-          rm ./bin/${asset_name}
-          rm -R ./bin/xelis-miner
+          rm ~/bin/${asset_name}
+          rm -R ~/bin/xelis-miner
 
       - name: Upload release asset
         uses: softprops/action-gh-release@v2
