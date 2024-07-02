@@ -16,7 +16,6 @@ jobs:
           hiveos_asset_name="xelis_miner-${version}_hiveos"
           hiveos_archive="bin/${hiveos_asset_name}.tar.gz"
           cp -r ./hive-os ./bin/xelis_miner
-          cp ./bin/${asset_name} ./bin/xelis_miner/xelis_miner
           sed 's/^ver="custom"/ver="${version}"/g' -i ./bin/xelis_miner/h-stats.sh
           tar -czvf "${hiveos_archive}" -C ./bin xelis_miner
 
