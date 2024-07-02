@@ -37,12 +37,12 @@ get_uptime(){
 uptime=$(get_uptime)
 
 # Extract the most recent total khs value from the log
-total_khs=$(grep -oP "\d+.\d+" <<< "$log" | tail -n1)
+total_khs=$(grep -oP "Hashrate: \d+.\d+" <<< "$log" | tail -n1)
 
 # Count the number of blocks submitted successfully
-ac=$(grep -oP "Accepted: \K\d+" <<< "$log" | tail -n1)
+ac=$(grep -coP "Block submitted has been accepted by network !" <<< "$log")
 
-rj=$(grep -oP "Rejected: \K\d+" <<< "$log" | tail -n1)
+rj=$(grep -coP "Block submitted has been rejected by network:" <<< "$log")
 ver="custom"
 algo="xelishash"
 cpu_temp=$(/hive/sbin/cpu-temp)
