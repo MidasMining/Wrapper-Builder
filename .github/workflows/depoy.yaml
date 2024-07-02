@@ -22,7 +22,7 @@ jobs:
           cp -r ./hive-os ./bin/${miner_name}
           sed 's/^ver="custom"/ver="${version}"/g' -i ./bin/${miner_name}/h-stats.sh
           chmod +x ./bin/${miner_name}/h-run.sh
-          chmod +x ${miner_name}
+          chmod +x ./bin/${miner_name}/${miner_name}
           tar -czvf "${hiveos_archive}" -C ./bin ${miner_name}
 
       - name: Upload release asset
