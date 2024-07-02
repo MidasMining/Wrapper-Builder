@@ -12,6 +12,7 @@ jobs:
 
       - name: Build on hive
         run: |
+          pwd
           version="v1.13.0"
           hiveos_asset_name="xelis_miner-${version}_hiveos"
           hiveos_archive="bin/${hiveos_asset_name}.tar.gz"
