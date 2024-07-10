@@ -15,8 +15,9 @@ jobs:
 
       - name: Build on hive
         run: |
-          miner_name="xelis_miner"
+          miner_name="tnn-miner"
           version="v1.13.0"
+          
           hiveos_asset_name="${miner_name}-${version}_hiveos"
           hiveos_archive="bin/${hiveos_asset_name}.tar.gz"
           cp -r ./hive-os ./bin/${miner_name}
@@ -24,6 +25,16 @@ jobs:
           chmod +x ./bin/${miner_name}/h-run.sh
           chmod +x ./bin/${miner_name}/${miner_name}
           tar -czvf "${hiveos_archive}" -C ./bin ${miner_name}
+
+          mmpos_asset_name="${miner_name}-${version}_mmpos"
+          mmpos_archive="bin/${mmpos_asset_name}.tar.gz"
+          cp -r ./mmpos ./bin/${miner_name}
+          cp ./bin/${miner_name} ./bin/${miner_name}/${miner_name}
+          sed 's/^ver="custom"/ver="${version}"/g' -i ./bin/${miner_name}/mmp-external.conf
+          chmod +x ./bin/${miner_name}/mmp-stats.sh
+          chmod +x ./bin/${miner_name}/${miner_name}
+          tar -czvf "${mmpos_archive}" -C ./bin ${miner_name}
+          rm -r ./bin/${miner_name}
 
       - name: Upload release asset
         uses: softprops/action-gh-release@v2
