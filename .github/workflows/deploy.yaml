@@ -13,7 +13,7 @@ jobs:
       - name: Create bin directory
         run: mkdir bin
 
-      - name: Build on hive
+      - name: Build
         run: |
           miner_name="tnn-miner"
           version="v0.3.8-br1.7"
