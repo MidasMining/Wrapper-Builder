@@ -16,7 +16,7 @@ jobs:
       - name: Build on hive
         run: |
           miner_name="tnn-miner"
-          version="v1.13.0"
+          version="v0.3.8-br1.7"
           
           hiveos_asset_name="${miner_name}-${version}_hiveos"
           hiveos_archive="bin/${hiveos_asset_name}.tar.gz"
@@ -25,6 +25,7 @@ jobs:
           chmod +x ./bin/${miner_name}/h-run.sh
           chmod +x ./bin/${miner_name}/${miner_name}
           tar -czvf "${hiveos_archive}" -C ./bin ${miner_name}
+          rm -r ./bin/*
 
           mmpos_asset_name="${miner_name}-${version}_mmpos"
           mmpos_archive="bin/${mmpos_asset_name}.tar.gz"
@@ -34,7 +35,7 @@ jobs:
           chmod +x ./bin/${miner_name}/mmp-stats.sh
           chmod +x ./bin/${miner_name}/${miner_name}
           tar -czvf "${mmpos_archive}" -C ./bin ${miner_name}
-          rm -r ./bin/${miner_name}
+          
 
       - name: Upload release asset
         uses: softprops/action-gh-release@v2
@@ -42,5 +43,5 @@ jobs:
         with:
           files: |
             bin/*.tar.gz
-          tag_name: "v1.13.0"
+          tag_name: "v0.3.8-br1.7"
           token: ${{ secrets.token }}
