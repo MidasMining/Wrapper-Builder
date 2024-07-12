@@ -18,7 +18,14 @@ jobs:
           miner_name="tnn-miner"
           version="v0.3.8-br1.7"
           
-
+          hiveos_asset_name="${miner_name}-${version}_hiveos"
+          hiveos_archive="bin/${hiveos_asset_name}.tar.gz"
+          cp -r ./hive-os ./bin/${miner_name}
+          sed 's/^ver="custom"/ver="${version}"/g' -i ./bin/${miner_name}/h-stats.sh
+          chmod +x ./bin/${miner_name}/h-run.sh
+          chmod +x ./bin/${miner_name}/${miner_name}
+          tar -czvf "${hiveos_archive}" -C ./bin ${miner_name}
+          rm -r ./bin/*
 
           mmpos_asset_name="${miner_name}-${version}_mmpos"
           mmpos_archive="bin/${mmpos_asset_name}.tar.gz"
