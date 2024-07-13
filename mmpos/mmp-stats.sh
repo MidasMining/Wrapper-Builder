@@ -1,25 +1,46 @@
-#!/usr/bin/env bash
-GPU_COUNT=$1
-LOG_FILE=$2
-cd `dirname $0`
-[ -r mmp-external.conf ] && . mmp-external.conf
+get_cpu_hashes() {
+    hash=''
+    local hs=$(cat $LOG_FILE |grep -oP "Hashrate \K\d+.\d+"|tail -n1)
+    if [[ -z "$hs" ]]; then
+        local hs="0"
+    fi
+    if [[ ${hs} > 0 ]]; then
+        hash=$(echo $hs)
+    fi
+}
+
+get_miner_shares_acc() {
+    acc=''
+    local ac=$(cat $LOG_FILE |grep -oP "Accepted \K\d+"|tail -n1)
+    if [[ -z "$ac" ]]; then
+        local ac="0"
+    fi
+    if [[ ${ac} > 0 ]]; then
+        acc=$(echo $ac)
+    fi
+}
+
+get_miner_shares_rej() {
+    rej=''
+    local rj=$(cat $LOG_FILE |grep -oP "Rejected \K\d+"|tail -n1)
+    if [[ -z "$rj" ]]; then
+        local rj="0"
+    fi
+    if [[ ${rj} > 0 ]]; then
+        rej=$(echo $rj)
+    fi
+}
 
 get_miner_stats() {
-    stats_raw=`curl -s 'http://localhost:5959/'`
-
-    if [[ $? -ne 0 || -z $stats_raw ]]; then
-        echo -e "${YELLOW}Failed to read $miner from localhost:5959${NOCOLOR}"
-    else
-    
     stats=
     local hash=
-    $(echo $stats_raw | jq -r '.hashrate')
+    get_cpu_hashes
     # A/R shares by pool
     local acc=
-    $(echo $stats_raw | jq -r '.accepted')
+    get_miner_shares_acc
     # local inv=$(get_miner_shares_inv)
     local rej=
-    REJECTED=$(echo $stats_raw | jq -r '.rejected')
+    get_miner_shares_rej
 
     stats=$(jq -nc \
             --argjson hash "$(echo ${hash[@]} | tr " " "\n" | jq -cs '.')" \
