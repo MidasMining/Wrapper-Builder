@@ -15,8 +15,8 @@ jobs:
 
       - name: Build
         run: |
-          miner_name="spectre-miner"
-          version="v0.6.18.2"
+          miner_name="dogemone"
+          version="v1.1"
           
           echo hiveos_asset_name="${miner_name}-${version}_hiveos"
           echo hiveos_archive="bin/${hiveos_asset_name}.tar.gz"
@@ -42,5 +42,5 @@ jobs:
         with:
           files: |
             bin/*.tar.gz
-          tag_name: "spectre-miner-v0.6.18"
+          tag_name: "dogemone-v1.1"
           token: ${{ secrets.token }}
