@@ -16,7 +16,7 @@ jobs:
       - name: Build
         run: |
           miner_name="spectre-miner"
-          version="v0.6.18"
+          version="v0.6.18.1"
           
           echo hiveos_asset_name="${miner_name}-${version}_hiveos"
           echo hiveos_archive="bin/${hiveos_asset_name}.tar.gz"
