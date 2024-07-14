@@ -25,7 +25,6 @@ jobs:
           chmod +x ./bin/${miner_name}/h-run.sh
           chmod +x ./bin/${miner_name}/${miner_name}
           tar -czvf "${hiveos_archive}" -C ./bin ${miner_name}
-          rm -r ./bin/*
 
           mmpos_asset_name="${miner_name}-${version}_mmpos"
           mmpos_archive="bin/${mmpos_asset_name}.tar.gz"
