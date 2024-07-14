@@ -18,14 +18,14 @@ jobs:
           miner_name="dogemone"
           version="v1.1"
           
-          echo hiveos_asset_name="${miner_name}-${version}_hiveos"
-          echo hiveos_archive="bin/${hiveos_asset_name}.tar.gz"
-          echo cp -r ./hive-os ./bin/${miner_name}
-          echo sed 's/^ver="custom"/ver="${version}"/g' -i ./bin/${miner_name}/h-stats.sh
-          echo chmod +x ./bin/${miner_name}/h-run.sh
-          echo chmod +x ./bin/${miner_name}/${miner_name}
-          echo tar -czvf "${hiveos_archive}" -C ./bin ${miner_name}
-          echo rm -r ./bin/*
+          hiveos_asset_name="${miner_name}-${version}_hiveos"
+          hiveos_archive="bin/${hiveos_asset_name}.tar.gz"
+          cp -r ./hive-os ./bin/${miner_name}
+          sed 's/^ver="custom"/ver="${version}"/g' -i ./bin/${miner_name}/h-stats.sh
+          chmod +x ./bin/${miner_name}/h-run.sh
+          chmod +x ./bin/${miner_name}/${miner_name}
+          tar -czvf "${hiveos_archive}" -C ./bin ${miner_name}
+          rm -r ./bin/*
 
           mmpos_asset_name="${miner_name}-${version}_mmpos"
           mmpos_archive="bin/${mmpos_asset_name}.tar.gz"
