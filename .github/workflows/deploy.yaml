@@ -38,7 +38,6 @@ jobs:
           chmod +x ./work/${miner_name}/mmp-stats.sh
           chmod +x ./work/${miner_name}/${miner_name}
           tar -czvf "${mmpos_archive}" -C ./work ${miner_name}
-          mv work/*.tar.gz bin/*.tar.gz
           
 
       - name: Upload release asset
