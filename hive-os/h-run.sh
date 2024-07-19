@@ -22,7 +22,7 @@ CUSTOM_USER_CONFIG=$(< "$CUSTOM_CONFIG_FILENAME")
 # Display the arguments
 echo "args: $CUSTOM_USER_CONFIG"
 
-MINER=dogemone
+MINER=xelis_miner
 
 # Remove the -arch argument and its value
 CLEAN=$(echo "$CUSTOM_USER_CONFIG" | sed -E 's/-arch [^ ]+ //')
