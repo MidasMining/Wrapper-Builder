@@ -39,14 +39,14 @@ uptime=$(get_uptime)
 
 DATA=$(curl -s http://127.0.0.1:8888)
 
-hs=$(jq '.hashrate' <<< "$DATA")
+total_khs=$(jq '.hashrate' <<< "$DATA")
 total_khs=$(echo "scale=2; $total_khs / 1000" | bc)
 khs=$total_khs
 hs[0]=$total_khs
 ac=$(jq '.accepted' <<< "$DATA")
 rj=$(jq '.rejected' <<< "$DATA")
 ver="custom"
-algo="xelishash"
+algo="xelis-hash"
 cpu_temp=$(/hive/sbin/cpu-temp)
 hs_units="hs"
 
