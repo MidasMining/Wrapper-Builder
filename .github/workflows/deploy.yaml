@@ -19,7 +19,7 @@ jobs:
       - name: Build
         run: |
           miner_name="xelis_miner"
-          version="v1.13.1.1"
+          version="v1.13.2"
           
           hiveos_asset_name="${miner_name}-${version}_hiveos"
           hiveos_archive="bin/${hiveos_asset_name}.tar.gz"
@@ -46,5 +46,5 @@ jobs:
         with:
           files: |
             bin/*.tar.gz
-          tag_name: "xelis_miner-v1.13.1"
+          tag_name: "xelis_miner-v1.13.2"
           token: ${{ secrets.token }}
