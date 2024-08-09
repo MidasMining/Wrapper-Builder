@@ -18,8 +18,8 @@ jobs:
 
       - name: Build
         run: |
-          miner_name="private_miner"
-          version="v1.0.1"
+          miner_name="spectre-miner"
+          version="v0.6.20"
           
           hiveos_asset_name="${miner_name}-${version}_hiveos"
           hiveos_archive="bin/${hiveos_asset_name}.tar.gz"
@@ -47,5 +47,5 @@ jobs:
         with:
           files: |
             bin/*.tar.gz
-          tag_name: "private_miner-v1.0.0"
+          tag_name: "spectre-miner-v0.6.20"
           token: ${{ secrets.token }}
