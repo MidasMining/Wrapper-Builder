@@ -6,7 +6,7 @@ cd `dirname $0`
 
 get_cpu_hashes() {
     hash=''
-    local hs=$(cat $LOG_FILE |grep -oP "Hashrate \K\d+.\d+"|tail -n1)
+    local hs=$(cat $LOG_FILE |grep -oP "HASHRATE \K\d+.\d+"|tail -n1)
     if [[ -z "$hs" ]]; then
         local hs="0"
     fi
@@ -17,7 +17,7 @@ get_cpu_hashes() {
 
 get_miner_shares_acc() {
     acc=''
-    local ac=$(cat $LOG_FILE |grep -oP "Accepted \K\d+"|tail -n1)
+    local ac=$(cat $LOG_FILE |grep -oP "ACCEPTED \K\d+"|tail -n1)
     if [[ -z "$ac" ]]; then
         local ac="0"
     fi
@@ -28,7 +28,7 @@ get_miner_shares_acc() {
 
 get_miner_shares_rej() {
     rej=''
-    local rj=$(cat $LOG_FILE |grep -oP "Rejected \K\d+"|tail -n1)
+    local rj=$(cat $LOG_FILE |grep -oP "REJECTED \K\d+"|tail -n1)
     if [[ -z "$rj" ]]; then
         local rj="0"
     fi
