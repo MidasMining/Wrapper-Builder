@@ -8,6 +8,7 @@ get_miner_stats() {
     DATA=$(curl -s http://localhost:8989/stats)
     stats=
     local hash=$(jq '.hashrate' <<< "$DATA")
+    local hash=$(echo "scale=2; $hash / 1000" | bc)
     # A/R shares by pool
     local acc=$(jq '.accepted' <<< "$DATA")
     # local inv=$(get_miner_shares_inv)
