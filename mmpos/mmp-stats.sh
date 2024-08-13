@@ -11,7 +11,7 @@ get_miner_stats() {
     # A/R shares by pool
     local acc=$(jq '.accepted' <<< "$DATA")
     # local inv=$(get_miner_shares_inv)
-    local rej=rj=$(jq '.rejected' <<< "$DATA")
+    local rej=$(jq '.rejected' <<< "$DATA")
 
     stats=$(jq -nc \
             --argjson hash "$(echo $hash | tr " " "\n" | jq -cs '.')" \
