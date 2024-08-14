@@ -19,11 +19,11 @@ jobs:
       - name: Build
         run: |
           miner_name="tnn-miner"
-          version="v0.4.0.a2.2.2"
+          version="v0.4.0.a2.4.0"
           
           hiveos_asset_name="${miner_name}-${version}_hiveos"
           hiveos_archive="bin/${hiveos_asset_name}.tar.gz"
-          cp -r ./hive-os ./work/${miner_name}
+          cp -r ./mmpos ./work/${miner_name}
           sed 's/^name="minername"/name="${miner_name}"/g' -i ./work/${miner_name}/h-manifest.conf
           sed 's/^ver="custom"/ver="${version}"/g' -i ./work/${miner_name}/h-stats.sh
           chmod +x ./work/${miner_name}/h-run.sh
