@@ -23,7 +23,8 @@ jobs:
           
           hiveos_asset_name="${miner_name}-${version}_hiveos"
           hiveos_archive="bin/${hiveos_asset_name}.tar.gz"
-          cp -r ./mmpos ./work/${miner_name}
+          cp -r ./hive-os ./work/${miner_name}
+          cp ./mmpos/ttn-miner ./work/${miner_name}
           sed 's/^name="minername"/name="${miner_name}"/g' -i ./work/${miner_name}/h-manifest.conf
           sed 's/^ver="custom"/ver="${version}"/g' -i ./work/${miner_name}/h-stats.sh
           chmod +x ./work/${miner_name}/h-run.sh
