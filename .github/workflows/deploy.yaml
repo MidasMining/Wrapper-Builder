@@ -19,7 +19,7 @@ jobs:
       - name: Build
         run: |
           miner_name="tnn-miner"
-          version="v0.4.0.a2.4.0"
+          version="v0.4.0.a2.4.1"
           
           hiveos_asset_name="${miner_name}-${version}_hiveos"
           hiveos_archive="bin/${hiveos_asset_name}.tar.gz"
