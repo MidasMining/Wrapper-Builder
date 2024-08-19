@@ -18,8 +18,8 @@ jobs:
 
       - name: Build
         run: |
-          miner_name="tnn-miner"
-          version="v0.4.0.b1.7"
+          miner_name="spectre-miner"
+          version="v0.6.21"
           
           hiveos_asset_name="${miner_name}-${version}_hiveos"
           hiveos_archive="bin/${hiveos_asset_name}.tar.gz"
@@ -49,5 +49,5 @@ jobs:
         with:
           files: |
             bin/*.tar.gz
-          tag_name: "tnn-miner-0.4.0"
+          tag_name: "spectre-miner-v0.6.21"
           token: ${{ secrets.token }}
