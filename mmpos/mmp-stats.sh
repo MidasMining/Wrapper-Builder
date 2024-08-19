@@ -4,18 +4,52 @@ LOG_FILE=$2
 cd `dirname $0`
 [ -r mmp-external.conf ] && . mmp-external.conf
 
+get_cpu_hashes() {
+    hash=''
+    local hs=$(cat $LOG_FILE |grep -oP "Hashrate \K\d+.\d+"|tail -n1)
+    if [[ -z "$hs" ]]; then
+        local hs="0"
+    fi
+    if [[ ${hs} > 0 ]]; then
+        hash=$(echo $hs)
+    fi
+}
+
+get_miner_shares_acc() {
+    acc=''
+    local ac=$(cat $LOG_FILE |grep -oP "Accepted \K\d+"|tail -n1)
+    if [[ -z "$ac" ]]; then
+        local ac="0"
+    fi
+    if [[ ${ac} > 0 ]]; then
+        acc=$(echo $ac)
+    fi
+}
+
+get_miner_shares_rej() {
+    rej=''
+    local rj=$(cat $LOG_FILE |grep -oP "Rejected \K\d+"|tail -n1)
+    if [[ -z "$rj" ]]; then
+        local rj="0"
+    fi
+    if [[ ${rj} > 0 ]]; then
+        rej=$(echo $rj)
+    fi
+}
+
 get_miner_stats() {
-    DATA=$(curl -s http://localhost:8989/stats)
     stats=
-    local hash=$(jq '.hashrate' <<< "$DATA")
-    local hash=$(echo "scale=2; $hash / 1000" | bc)
+    local hash=
+    get_cpu_hashes
     # A/R shares by pool
-    local acc=$(jq '.accepted' <<< "$DATA")
+    local acc=
+    get_miner_shares_acc
     # local inv=$(get_miner_shares_inv)
-    local rej=$(jq '.rejected' <<< "$DATA")
+    local rej=
+    get_miner_shares_rej
 
     stats=$(jq -nc \
-            --argjson hash "$(echo $hash | tr " " "\n" | jq -cs '.')" \
+            --argjson hash "$(echo ${hash[@]} | tr " " "\n" | jq -cs '.')" \
             --arg busid "cpu" \
             --arg units "khs" \
             --arg ac "$acc" --arg inv "0" --arg rj "$rej" \
