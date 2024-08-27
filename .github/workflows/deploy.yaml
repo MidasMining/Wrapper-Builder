@@ -22,7 +22,7 @@ jobs:
           version="v0.4.0.b1.9"
           
           asset_name="${miner_name}-${version}"
-          archive="bin/${hiveos_asset_name}.tar.gz"
+          archive="bin/${asset_name}.tar.gz"
           cp -r ./wrapper ./work/${miner_name}
           sed "s/^MINER_NAME=minername/MINER_NAME=$miner_name/g" -i ./work/${miner_name}/h-manifest.conf
           sed 's/^ver="custom"/ver="${version}"/g' -i ./work/${miner_name}/h-stats.sh
