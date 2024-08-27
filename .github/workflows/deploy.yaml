@@ -19,28 +19,20 @@ jobs:
       - name: Build
         run: |
           miner_name="tnn-miner"
-          version="v0.4.0.b1.7"
+          version="v0.4.0.b1.9"
           
-          hiveos_asset_name="${miner_name}-${version}_hiveos"
-          hiveos_archive="bin/${hiveos_asset_name}.tar.gz"
-          cp -r ./hive-os ./work/${miner_name}
-          cp ./mmpos/${miner_name} ./work/${miner_name}/${miner_name}
+          asset_name="${miner_name}-${version}"
+          archive="bin/${hiveos_asset_name}.tar.gz"
+          cp -r ./wrapper ./work/${miner_name}
           sed "s/^MINER_NAME=minername/MINER_NAME=$miner_name/g" -i ./work/${miner_name}/h-manifest.conf
           sed 's/^ver="custom"/ver="${version}"/g' -i ./work/${miner_name}/h-stats.sh
+          sed "s/^EXTERNAL_NAME=minername/EXTERNAL_NAME=$miner_name/g" -i ./work/${miner_name}/mmp-external.conf
+          sed "s/^EXTERNAL_VERSION=custom/EXTERNAL_VERSION=$version/g" -i ./work/${miner_name}/mmp-external.conf
           chmod +x ./work/${miner_name}/h-run.sh
           chmod +x ./work/${miner_name}/h-stats.sh
           chmod +x ./work/${miner_name}/${miner_name}
-          tar -czvf "${hiveos_archive}" -C ./work ${miner_name}
-          rm -r ./work/*
-
-          mmpos_asset_name="${miner_name}-${version}_mmpos"
-          mmpos_archive="bin/${mmpos_asset_name}.tar.gz"
-          cp -r ./mmpos ./work/${miner_name}
-          sed "s/^EXTERNAL_NAME=minername/EXTERNAL_NAME=$miner_name/g" -i ./work/${miner_name}/mmp-external.conf
-          sed "s/^EXTERNAL_VERSION=custom/EXTERNAL_VERSION=$version/g" -i ./work/${miner_name}/mmp-external.conf
           chmod +x ./work/${miner_name}/mmp-stats.sh
-          chmod +x ./work/${miner_name}/${miner_name}
-          tar -czvf "${mmpos_archive}" -C ./work ${miner_name}
+          tar -czvf "${hiveos_archive}" -C ./work ${miner_name}
           
 
       - name: Upload release asset
