@@ -19,7 +19,7 @@ jobs:
       - name: Build
         run: |
           miner_name="tnn-miner"
-          version="v0.4.0.b1.9"
+          version="v0.4.0.b2.3"
           
           asset_name="${miner_name}-${version}"
           archive="bin/${asset_name}.tar.gz"
