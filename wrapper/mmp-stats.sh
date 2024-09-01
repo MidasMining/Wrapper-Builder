@@ -5,10 +5,10 @@ cd `dirname $0`
 [ -r mmp-external.conf ] && . mmp-external.conf
 
 get_miner_stats() {
-    DATA=$(curl -s http://localhost:8989/stats)
+    DATA=$(curl -s http://127.0.0.1:8888)
+    
     stats=
     local hash=$(jq '.hashrate' <<< "$DATA")
-    local hash=$(echo "scale=2; $hash / 1000" | bc)
     # A/R shares by pool
     local acc=$(jq '.accepted' <<< "$DATA")
     # local inv=$(get_miner_shares_inv)

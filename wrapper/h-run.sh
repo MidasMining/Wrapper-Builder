@@ -1,41 +1,34 @@
 #!/usr/bin/env bash
 
-
+# Source the configuration file
 source h-manifest.conf
 
+# Define the custom log directory
+LOG_DIR=$(dirname "$CUSTOM_LOG_BASENAME")
+mkdir -p "$LOG_DIR"
 
-#[[ `ps aux | grep "./rqiner-x86" | grep -v grep | wc -l` != 0 ]] &&
-#	echo -e "${RED}$CUSTOM_NAME miner is already running${NOCOLOR}" &&
-#	exit 1
-
-CUSTOM_LOG_BASEDIR=`dirname "$CUSTOM_LOG_BASENAME"`
-[[ ! -d $CUSTOM_LOG_BASEDIR ]] && mkdir -p $CUSTOM_LOG_BASEDIR
-
-if [[ -z $CUSTOM_CONFIG_FILENAME ]]; then
-	echo -e "The config file is not defined"
+# Check if the custom config filename is defined
+if [[ -z ${CUSTOM_CONFIG_FILENAME:-} ]]; then
+    echo "The config file is not defined"
+    exit 1
 fi
 
+# Set the library path
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/hive/lib
 
-CUSTOM_USER_CONFIG=$(< $CUSTOM_CONFIG_FILENAME)
+# Read the custom user configuration
+CUSTOM_USER_CONFIG=$(< "$CUSTOM_CONFIG_FILENAME")
 
-#echo "about to call executable "
+# Display the arguments
 echo "args: $CUSTOM_USER_CONFIG"
 
-OLD=""
-MINER=$MINER_NAME
+MINER=xelis_miner
 
-
-
-
-
-#strip arch from commandline
 # Remove the -arch argument and its value
 CLEAN=$(echo "$CUSTOM_USER_CONFIG" | sed -E 's/-arch [^ ]+ //')
 echo "args are now: $CLEAN"
 echo "We are using miner: $MINER"
-echo $(date +%s) > "/tmp/miner_start_time"
-/hive/miners/custom/$MINER/$MINER -v 2>&1 | grep 'Miner version:' | awk '{print $3}' > /tmp/.tnn-miner-version
-/hive/miners/custom/$MINER/$MINER $CLEAN --broadcast 2>&1 | tee -a  ${CUSTOM_LOG_BASENAME}.log
-echo "Miner has exited"
 
+echo $(date +%s) > "/tmp/miner_start_time"
+/hive/miners/custom/$MINER/$MINER $CLEAN 2>&1 | tee -a ${CUSTOM_LOG_BASENAME}.log
+echo "Miner has exited"
