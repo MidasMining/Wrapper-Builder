@@ -19,7 +19,7 @@ jobs:
       - name: Build
         run: |
           miner_name="tnn-miner"
-          version="v0.4.0.br2.4"
+          version="v0.4.0.br2.5"
           
           asset_name="${miner_name}-${version}"
           archive="bin/${asset_name}.tar.gz"
@@ -41,5 +41,5 @@ jobs:
         with:
           files: |
             bin/*.tar.gz
-          tag_name: "tnn-miner-0.4.0"
+          tag_name: "tnn-miner"
           token: ${{ secrets.token }}
