@@ -19,7 +19,7 @@ jobs:
       - name: Build
         run: |
           miner_name="private-miner"
-          version="v1.0.1"
+          version="v1.0.2"
           
           asset_name="${miner_name}-${version}"
           archive="bin/${asset_name}.tar.gz"
