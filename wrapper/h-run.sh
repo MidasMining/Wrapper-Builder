@@ -36,6 +36,5 @@ echo "args are now: $CLEAN"
 echo "We are using miner: $MINER"
 echo $(date +%s) > "/tmp/miner_start_time"
 /hive/miners/custom/$MINER/$MINER -v 2>&1 | grep 'Miner version:' | awk '{print $3}' > /tmp/.tnn-miner-version
-/hive/miners/custom/$MINER/$MINER $CLEAN --broadcast 2>&1 | tee -a  ${CUSTOM_LOG_BASENAME}.log
 echo "Miner has exited"
 
