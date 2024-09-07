@@ -4,10 +4,6 @@
 source h-manifest.conf
 
 
-#[[ `ps aux | grep "./rqiner-x86" | grep -v grep | wc -l` != 0 ]] &&
-#	echo -e "${RED}$CUSTOM_NAME miner is already running${NOCOLOR}" &&
-#	exit 1
-
 CUSTOM_LOG_BASEDIR=`dirname "$CUSTOM_LOG_BASENAME"`
 [[ ! -d $CUSTOM_LOG_BASEDIR ]] && mkdir -p $CUSTOM_LOG_BASEDIR
 
@@ -26,15 +22,11 @@ OLD=""
 MINER=$MINER_NAME
 
 
-
-
-
 #strip arch from commandline
 # Remove the -arch argument and its value
 CLEAN=$(echo "$CUSTOM_USER_CONFIG" | sed -E 's/-arch [^ ]+ //')
 echo "args are now: $CLEAN"
 echo "We are using miner: $MINER"
 echo $(date +%s) > "/tmp/miner_start_time"
-/hive/miners/custom/$MINER/$MINER -v 2>&1 | grep 'Miner version:' | awk '{print $3}' > /tmp/.tnn-miner-version
+/hive/miners/custom/$MINER/$MINER $CLEAN 2>&1 | tee -a  ${CUSTOM_LOG_BASENAME}.log
 echo "Miner has exited"
-
