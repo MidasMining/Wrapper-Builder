@@ -55,7 +55,7 @@ rj=$(jq '.rejected' <<< "$DATA")
 uptime=$(jq '.uptime' <<< "$DATA")
 ver=$(jq '.version' <<< "$DATA")
 echo "$ver"
-algo="SPECTREX"
+algo="DigiSeal"
 cpu_fan[0]=get_cpu_fans
 hs_units="hs"
 echo "HS[0] = ${hs[0]}"
